@@ -1,0 +1,11 @@
+--- ecap_clamav_adapter-2.0.0/src/Xaction.cc.orig	2016-03-14 16:13:12.389945793 -0400
++++ ecap_clamav_adapter-2.0.0/src/Xaction.cc	2016-03-14 16:16:12.780817706 -0400
+@@ -301,7 +301,7 @@ libecap::Area Adapter::Xaction::abConten
+     case actPending: {
+         // We are here because we are or were trickling. If we stopped trickling,
+         // we should not give more than we had trickled (until the final action).
+-        const Size tricklingMax = (trickledSize > pos) ? trickledSize - pos : 0;
++        size_type tricklingMax = (size_type) ((trickledSize > pos) ? trickledSize - pos : 0);
+         bufSize = std::min(bufSize, tricklingMax);
+         // fall through to also obey actAllow limits
+     }
