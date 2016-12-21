@@ -1,14 +1,14 @@
 Summary:	Clamav ecap module
 Name:		ecap-clamav
 Version:	2.0.0
-Release:	%mkrel 2
+Release:	1%{?dist}
 License:	BSD
 Group:		Networking/Other
 URL:		http://www.ecap.org
 Source0:	http://www.measurement-factory.com/tmp/ecap/ecap_clamav_adapter-%{version}.tar.gz
 Patch0:		ecap_clamav_adapter-2.0.0-size-mismatch.patch
-BuildRequires:	ecap-devel
-BuildRequires:	ecap
+BuildRequires:	libecap-devel
+BuildRequires:	libecap
 BuildRequires:	clamav-devel
 Requires:	squid
 
@@ -20,17 +20,20 @@ The clamav component contains ecap interface for clamav.
 %autopatch -p1
 
 %build
-%configure2_5x
-%make
+%configure
+make
 
 %install
-%makeinstall_std
+make install DESTDIR=%{buildroot}
 
 %files
 %{_libdir}/ecap_clamav_adapter.*
 
 
 %changelog
+* Wed Dec 16 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 2.0.0.1
+- Rebuilt for CentOS 7
+
 * Mon Mar 14 2016 luigiwalser <luigiwalser> 2.0.0-2.mga6
 + Revision: 990681
 - add patch to fix data type mismatch
